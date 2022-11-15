@@ -1,5 +1,6 @@
 import sys
 import os
+import fileutils
 
 
 class TerminalNote:
@@ -29,27 +30,16 @@ class TerminalNote:
             print("Coming soon!")
             # TODO: Implement this functionality
         elif self.command == '--clear':
-            self.clear_file()
+            fileutils.clear_file(self.file_name, self.file_type)
         else:
             text = ' '.join(sys.argv[1:])
-            self.append_to_file(text)
+            fileutils.append_to_file(text, self.file_name, self.file_type)
             print("Note saved!")
-
-    def append_to_file(self, text):
-        with open(f'{self.file_name}.{self.file_type}', 'a') as f:
-            f.write(f"{text}\n")
-
-    def clear_file(self):
-        open(f'{self.file_name}.{self.file_type}', 'w').close()
 
 
 def main():
     terminal_note = TerminalNote()
     terminal_note.select_command()
-
-
-
-
 
 
 if __name__ == '__main__':
